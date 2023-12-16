@@ -1,12 +1,27 @@
 package oncall.view;
 
+import java.util.List;
+import oncall.model.BatchResult;
+import oncall.model.data.HolidayInformation;
+
 public class OutputView {
 
     public OutputView() {
     }
 
+    public void printBatchResults(List<BatchResult> batchResults) {
+        batchResults.forEach(this::printBatchResult);
+    }
 
-    // TODO : printf로 출력하는 것을 기본으로 할 것
+    private void printBatchResult(BatchResult batchResult) {
+        if (HolidayInformation.isHoliday(batchResult.month(), batchResult.date())) {
+            System.out.printf(Message.HOLIDAY_MESSAGE.message, batchResult.month(),
+                batchResult.date(), batchResult.day(), batchResult.name());
+            return;
+        }
+        System.out.printf(Message.BASIC_MESSAGE.message, batchResult.month(), batchResult.date(), batchResult.day(), batchResult.name());
+    }
+
     private enum Message {
 
         BASIC_MESSAGE("%d월 %d일 %s %s"),
