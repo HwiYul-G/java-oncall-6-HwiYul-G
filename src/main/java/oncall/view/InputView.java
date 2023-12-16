@@ -1,26 +1,33 @@
 package oncall.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
+import oncall.model.Employees;
+import oncall.model.Month;
+import oncall.model.data.WorkDay;
+import oncall.util.Util;
 
 public class InputView {
 
 
-    public void inputMonthAndStartDay() {
+    public Month inputMonthAndStartDay() {
         System.out.println(ConsoleMessage.INPUT_MONTH_AND_START_DAY.message);
-        String input = Console.readLine();
-        // TODO : 데이터변경
+        List<String> input = Util.splitByComma(Console.readLine());
+        int month = Integer.parseInt(input.get(0));
+        String startDay = input.get(1);
+        return new Month(month, startDay);
     }
 
-    public void inputWeekdayInfo(){
+    public Employees inputWeekdayInfo(){
         System.out.println(ConsoleMessage.INPUT_WEEKDAY.message);
-        String input = Console.readLine();
-        // TODO : 데이터변경
+        List<String> input = Util.splitByComma(Console.readLine());
+        return Employees.of(input, WorkDay.WEEKDAY);
     }
 
-    public void inputWeekendInfo(){
+    public Employees inputWeekendInfo(){
         System.out.println(ConsoleMessage.INPUT_WEEKND.message);
-        String input = Console.readLine();
-        // TODO : 데이터변경
+        List<String> input = Util.splitByComma(Console.readLine());
+        return Employees.of(input, WorkDay.WEEKEND);
     }
 
     private enum ConsoleMessage {

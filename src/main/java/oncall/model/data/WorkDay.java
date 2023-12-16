@@ -1,5 +1,5 @@
 package oncall.model.data;
 
 public enum WorkDay {
-    HOLIDAY, WEEKDAY, WEEKEND
+    HOLIDAY, WEEKDAY, WEEKEND, DEFAULT;
 }

@@ -1,6 +1,7 @@
 package oncall.model;
 
 import java.util.List;
+import oncall.model.data.WorkDay;
 import oncall.util.ExceptionMessage;
 
 public record Employees(List<Employee> employees) {
@@ -33,5 +34,14 @@ public record Employees(List<Employee> employees) {
         Employee temp = employees.get(index1);
         employees.set(index1, employees.get(index2));
         employees.set(index2, temp);
+    }
+
+
+    // List<Stirng> names를 받아서 해당 names의 순서대로 '평일' 노동자 생성
+    public static Employees of(List<String> names, WorkDay workDay){
+        List<Employee> employees = names.stream()
+            .map(name -> new Employee(name ,workDay))
+            .toList();
+        return new Employees(employees);
     }
 }
