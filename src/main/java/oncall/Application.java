@@ -3,7 +3,7 @@ package oncall;
 import oncall.controller.ApplicationState;
 import oncall.controller.InputController;
 import oncall.controller.OutputController;
-import oncall.model.service.BatchService;
+import oncall.service.BatchService;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 

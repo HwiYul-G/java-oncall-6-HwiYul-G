@@ -2,7 +2,7 @@ package oncall.controller;
 
 import java.util.List;
 import oncall.model.BatchResult;
-import oncall.model.service.BatchService;
+import oncall.service.BatchService;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
