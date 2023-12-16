@@ -4,11 +4,13 @@ import java.util.List;
 import oncall.model.data.WorkDay;
 import oncall.util.ExceptionMessage;
 
-public record Employees(List<Employee> employees) {
-    private static int currentIndex = 0;
+public class Employees{
+    private final List<Employee> employees;
+    private int currentIndex = 0;
 
     private static final int MAX_EMPLOYEE_COUNT = 35;
-    public Employees {
+    public Employees(List<Employee> employees) {
+        this.employees = employees;
         validateDuplication();
         validateLength();
     }
@@ -51,7 +53,7 @@ public record Employees(List<Employee> employees) {
     }
 
     // 다음 인덱스를 반환하는 함수
-    private int nextIndex(int index) {
+    public int nextIndex(int index) {
         return (index + 1) % employees.size();
     }
 

@@ -7,10 +7,10 @@ public record Employee(String name, WorkDay workDay) {
     private final static int MAX_NAME_LENGTH = 5;
 
     public Employee {
-        validateName();
+        validateName(name);
     }
 
-    private void validateName() {
+    private void validateName(String name) {
         if (name.length() > MAX_NAME_LENGTH) {
             // TODO : error message 추후 정리
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getMessage());
