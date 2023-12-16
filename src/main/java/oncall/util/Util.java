@@ -5,9 +5,6 @@ import java.util.List;
 
 public class Util {
 
-    private Util() {
-    }
-
     public static String removeSpace(String input) {
         return input.replaceAll(Regex.SPACE.regex, Regex.NO_SPACE.regex);
     }

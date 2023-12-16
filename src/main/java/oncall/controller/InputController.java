@@ -2,57 +2,64 @@ package oncall.controller;
 
 import oncall.model.Employees;
 import oncall.model.Month;
+import oncall.model.service.BatchService;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
 public class InputController {
+
     private final InputView inputView;
     private final OutputView outputView;
     private final ApplicationState applicationState;
+    private final BatchService batchService;
 
-    public InputController(InputView inputView, OutputView outputView, ApplicationState applicationState) {
+    public InputController(InputView inputView, OutputView outputView,
+        ApplicationState applicationState, BatchService batchService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.applicationState = applicationState;
+        this.batchService = batchService;
     }
 
-    public void run(){
-        inputMonthData();
-        inputWeekdayData();
-        inputWeekendData();
+    public void run() {
+        Month month = inputMonthData();
+        applicationState.setMonth(month);
+
+        Employees weekdayEmployees = inputWeekdayData();
+        applicationState.setWeekdayEmployees(weekdayEmployees);
+
+        Employees weekendEmployees = inputWeekendData();
+        applicationState.setWeekendEmployees(weekendEmployees);
     }
 
-    private void inputMonthData(){
+    private Month inputMonthData() {
         do {
             try {
-                Month month = inputView.inputMonthAndStartDay();
-                applicationState.setMonth(month);
-            }catch(IllegalArgumentException e){
+                return inputView.inputMonthAndStartDay();
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        }while(true);
+        } while (true);
     }
 
-    private void inputWeekdayData(){
+    private Employees inputWeekdayData() {
         do {
             try {
-                Employees weekdayEmployees = inputView.inputWeekdayInfo();
-                applicationState.setWeekdayEmployees(inputView.inputWeekdayInfo());
-            }catch(IllegalArgumentException e){
+                return inputView.inputWeekdayInfo();
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        }while(true);
+        } while (true);
     }
 
-    private void inputWeekendData(){
+    private Employees inputWeekendData() {
         do {
             try {
-                Employees weekendEmployees = inputView.inputWeekendInfo();
-                applicationState.setWeekendEmployees(inputView.inputWeekendInfo());
-            }catch(IllegalArgumentException e){
+                return inputView.inputWeekendInfo();
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        }while(true);
+        } while (true);
     }
 
 }
