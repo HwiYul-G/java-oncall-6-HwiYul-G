@@ -5,6 +5,13 @@ import oncall.model.data.WorkDay;
 import oncall.util.ExceptionMessage;
 
 public record Employees(List<Employee> employees) {
+    private static int currentIndex = 0;
+
+    private static final int MAX_EMPLOYEE_COUNT = 35;
+    public Employees {
+        validateDuplication();
+        validateLength();
+    }
 
     // 검사 로직
     // employees의 개별 item인 employee의 이름이 중복되면 안됨
@@ -14,6 +21,13 @@ public record Employees(List<Employee> employees) {
             .distinct()
             .count();
         if (distinctCount != employees.size()) {
+            // TODO : exception message 나중에 처리
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getMessage());
+        }
+    }
+
+    private void validateLength(){
+        if(employees.size() > MAX_EMPLOYEE_COUNT){
             // TODO : exception message 나중에 처리
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getMessage());
         }
@@ -34,6 +48,21 @@ public record Employees(List<Employee> employees) {
         Employee temp = employees.get(index1);
         employees.set(index1, employees.get(index2));
         employees.set(index2, temp);
+    }
+
+    // 다음 인덱스를 반환하는 함수
+    private int nextIndex(int index) {
+        return (index + 1) % employees.size();
+    }
+
+    public Employee getNextEmployee(){
+        Employee employee = employees.get(currentIndex);
+        currentIndex = nextIndex(currentIndex);
+        return employee;
+    }
+
+    public Employee getEmployeeByIndex(int index) {
+        return employees.get(index);
     }
 
 
