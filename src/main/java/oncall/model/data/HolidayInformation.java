@@ -33,13 +33,13 @@ public enum HolidayInformation {
         return date;
     }
 
-    // int와 date를 이용해서 해당 날짜가 공휴일인 경우 WorkDay를 Holiday로 반환하는 메서드
-    public static WorkDay isHoliday(int month, int date){
-        for(HolidayInformation holiday : HolidayInformation.values()){
-            if(holiday.getMonth() == month && holiday.getDate() == date){
-                return WorkDay.HOLIDAY;
+    // int와 date를 이용해서 해당 날짜가 공휴일인지 아닌지 체크하는 함수
+    public static boolean isHoliday(int month, int date){
+        for(HolidayInformation holidayInformation : HolidayInformation.values()){
+            if(holidayInformation.getMonth() == month && holidayInformation.getDate() == date){
+                return true;
             }
         }
-        return ;
+        return false;
     }
 }
