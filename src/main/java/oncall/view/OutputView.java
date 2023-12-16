@@ -6,6 +6,18 @@ import oncall.model.data.HolidayInformation;
 
 public class OutputView {
 
+    private enum Message {
+
+        BASIC_MESSAGE("%d월 %d일 %s %s" + System.lineSeparator()),
+        HOLIDAY_MESSAGE("%d월 %d일 %s(휴일) %s" + System.lineSeparator());
+
+        private final String message;
+
+        Message(final String message) {
+            this.message = message;
+        }
+    }
+
     public OutputView() {
     }
 
@@ -22,16 +34,5 @@ public class OutputView {
         System.out.printf(Message.BASIC_MESSAGE.message, batchResult.month(), batchResult.date(), batchResult.day(), batchResult.name());
     }
 
-    private enum Message {
-
-        BASIC_MESSAGE("%d월 %d일 %s %s"),
-        HOLIDAY_MESSAGE("%d월 %d일 %s(휴일) %s");
-
-        private final String message;
-
-        Message(final String message) {
-            this.message = message;
-        }
-    }
 
 }
